@@ -17,10 +17,9 @@ const successRequest = (data) => ({ type: SUCCESS_REQUEST, data });
 
 const failedRequest = (error) => ({ type: FAILED_REQUEST, error });
 
-export const addExpense = (expense, exchange) => ({
+export const addExpense = (expense) => ({
   type: NEW_EXPENSE,
   expense,
-  exchange,
 });
 
 export const fetchAPI = () => async (dispatch) => {

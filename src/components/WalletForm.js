@@ -34,10 +34,7 @@ class WalletForm extends Component {
     const { newExpense } = this.props;
     const quotation = await getCurrentCoinQuotation();
     expense.exchangeRates = quotation;
-    const exchange = Object
-      .values(quotation)
-      .find((item) => item.code === expense.currency);
-    newExpense(expense, exchange);
+    newExpense(expense);
     this.setState((prev) => ({
       id: prev.id + 1,
       value: '',
