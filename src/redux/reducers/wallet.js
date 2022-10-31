@@ -3,6 +3,7 @@ import {
   FAILED_REQUEST,
   SUCCESS_REQUEST,
   NEW_EXPENSE,
+  DELETE_EXPENSE,
 } from '../actions';
 
 const initialState = {
@@ -31,7 +32,16 @@ const walletReducer = (state = initialState, action) => {
       + Number(action.expense.value
         * action.expense.exchangeRates[action.expense.currency].ask))
         .toFixed(2),
-      exchange: [...state.exchange, action.exchange],
+    };
+  case DELETE_EXPENSE:
+    return {
+      ...state,
+      total: Math.abs(Number(state.total)
+        - Number(state.expenses[action.index].value
+          * state.expenses[action.index]
+            .exchangeRates[state.expenses[action.index].currency].ask))
+        .toFixed(2),
+      expenses: state.expenses.filter((_expense, index) => index !== action.index),
     };
   default:
     return state;
