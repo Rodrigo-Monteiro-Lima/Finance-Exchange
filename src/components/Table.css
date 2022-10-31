@@ -1,0 +1,28 @@
+table , th , td {
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+  margin: auto;
+}
+
+th , td {
+  padding: 10px;
+  text-align: center;
+  width: 120px;
+}
+
+th {
+  font-weight: 900;
+}
+
+
+tr:nth-child( even ) {
+  background-color: #dcebe6;
+}
+
+tr:hover:nth-child( 1n + 2 ) {
+  background-color: #085f63;
+  color: white;
+}
