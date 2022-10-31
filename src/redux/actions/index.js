@@ -4,6 +4,7 @@ export const LOG_IN = 'LOG_IN';
 export const REQUEST_API = 'REQUEST_API';
 export const SUCCESS_REQUEST = 'SUCCESS_REQUEST';
 export const FAILED_REQUEST = 'FAILED_REQUEST';
+export const NEW_EXPENSE = 'NEW_EXPENSE';
 
 export const login = (user) => ({
   type: LOG_IN,
@@ -15,6 +16,12 @@ const requestAPI = () => ({ type: REQUEST_API });
 const successRequest = (data) => ({ type: SUCCESS_REQUEST, data });
 
 const failedRequest = (error) => ({ type: FAILED_REQUEST, error });
+
+export const addExpense = (expense, exchange) => ({
+  type: NEW_EXPENSE,
+  expense,
+  exchange,
+});
 
 export const fetchAPI = () => async (dispatch) => {
   try {

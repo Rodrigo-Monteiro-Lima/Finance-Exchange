@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchAPI } from '../redux/actions';
+import { fetchAPI, addExpense } from '../redux/actions';
+import getCurrentCoinQuotation from '../services/coinQuotationAPI';
 
 class WalletForm extends Component {
   constructor() {
@@ -13,7 +14,7 @@ class WalletForm extends Component {
       method: 'Dinheiro',
       tag: 'Alimentação',
       description: '',
-      // id: 0,
+      id: 0,
     };
   }
 
@@ -29,9 +30,35 @@ class WalletForm extends Component {
     });
   };
 
+  handleClick = async (expense) => {
+    const { newExpense } = this.props;
+    const quotation = await getCurrentCoinQuotation();
+    expense.exchangeRates = quotation;
+    const exchange = Object
+      .values(quotation)
+      .find((item) => item.code === expense.currency);
+    newExpense(expense, exchange);
+    this.setState((prev) => ({
+      id: prev.id + 1,
+      value: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+      description: '',
+    }));
+  };
+
   render() {
-    const { currency, description, method, tag, value } = this.state;
+    const { currency, description, method, tag, value, id } = this.state;
     const { currencies } = this.props;
+    const expense = {
+      id,
+      value,
+      currency,
+      method,
+      tag,
+      description,
+    };
 
     return (
       <form action="">
@@ -102,25 +129,30 @@ class WalletForm extends Component {
         </label>
         <button
           type="button"
+          onClick={ () => this.handleClick(expense) }
         >
           Adicionar despesa
+
         </button>
       </form>
     );
   }
 }
 
-const mapStateToProps = ({ wallet: { currencies, expenses } }) => ({
+const mapStateToProps = ({ wallet: { currencies } }) => ({
   currencies,
-  expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrencies: () => dispatch(fetchAPI()),
+  newExpense: (expense, exchange) => dispatch(addExpense(expense, exchange)),
+  saveExpense: (expenses) => dispatch(saveEditExpense(expenses)),
+
 });
 
 WalletForm.propTypes = {
   fetchCurrencies: PropTypes.func.isRequired,
+  newExpense: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 

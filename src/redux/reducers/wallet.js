@@ -2,6 +2,7 @@ import {
   REQUEST_API,
   FAILED_REQUEST,
   SUCCESS_REQUEST,
+  NEW_EXPENSE,
 } from '../actions';
 
 const initialState = {
@@ -19,9 +20,19 @@ const walletReducer = (state = initialState, action) => {
   case REQUEST_API:
     return { ...state, isFetching: true };
   case SUCCESS_REQUEST:
-    return { ...state, currencies: action.data, isFetching: false };
+    return { ...state, currencies: action.data };
   case FAILED_REQUEST:
-    return { ...state, error: action.error, isFetching: false };
+    return { ...state, error: action.error };
+  case NEW_EXPENSE:
+    return {
+      ...state,
+      expenses: [...state.expenses, action.expense],
+      total: (Number(state.total)
+      + Number(action.expense.value
+        * action.expense.exchangeRates[action.expense.currency].ask))
+        .toFixed(2),
+      exchange: [...state.exchange, action.exchange],
+    };
   default:
     return state;
   }
