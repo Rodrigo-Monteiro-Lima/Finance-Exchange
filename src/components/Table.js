@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import './Table.css';
 // import { MdDeleteForever } from 'react-icons/md';
 // import { FaRegEdit } from 'react-icons/fa';
-import { deleteExpense } from '../redux/actions';
+import { deleteExpense, editExpense } from '../redux/actions';
 
 class Table extends Component {
   render() {
-    const { expenses, removeExpense } = this.props;
+    const { expenses, removeExpense, edit } = this.props;
     return (
       <table>
         <thead>
@@ -54,6 +54,7 @@ class Table extends Component {
                 <button
                   type="button"
                   data-testid="edit-btn"
+                  onClick={ () => edit(expense.id) }
                 >
                   Editar
 
@@ -82,6 +83,7 @@ class Table extends Component {
 Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.shape().isRequired).isRequired,
   removeExpense: PropTypes.func.isRequired,
+  edit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ wallet: { expenses } }) => ({
@@ -90,6 +92,7 @@ const mapStateToProps = ({ wallet: { expenses } }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   removeExpense: (index) => dispatch(deleteExpense(index)),
+  edit: (id) => dispatch(editExpense(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

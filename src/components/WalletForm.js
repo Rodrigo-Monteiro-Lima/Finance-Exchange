@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchAPI, addExpense } from '../redux/actions';
+import { fetchAPI, addExpense, saveEditExpense } from '../redux/actions';
 import getCurrentCoinQuotation from '../services/coinQuotationAPI';
 
 class WalletForm extends Component {
@@ -23,12 +23,35 @@ class WalletForm extends Component {
     fetchCurrencies();
   }
 
+  componentDidUpdate(prevProps) {
+    const { editor, expenses, idToEdit } = this.props;
+    if (editor && prevProps.editor === false) {
+      const expenseToEdit = expenses.find((item) => item.id === idToEdit);
+      this.setState({
+        id: expenseToEdit.id,
+        value: expenseToEdit.value,
+        currency: expenseToEdit.currency,
+        method: expenseToEdit.method,
+        tag: expenseToEdit.tag,
+        description: expenseToEdit.description,
+      });
+    }
+  }
+
   handleChange = ({ target }) => {
     const { name, value } = target;
     this.setState({
       [name]: value,
     });
   };
+
+  resetState = () => ({
+    value: '',
+    currency: 'USD',
+    tag: 'Alimentação',
+    method: 'Dinheiro',
+    description: '',
+  });
 
   handleClick = async (expense) => {
     const { newExpense } = this.props;
@@ -37,17 +60,26 @@ class WalletForm extends Component {
     newExpense(expense);
     this.setState((prev) => ({
       id: prev.id + 1,
-      value: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-      description: '',
+      ...this.resetState(),
+    }));
+  };
+
+  handleSave = (expense) => {
+    const { saveExpense, expenses, idToEdit } = this.props;
+    const expenseToEdit = expenses.find((item) => item.id === idToEdit);
+    const editIndex = expenses.findIndex((item) => item.id === idToEdit);
+    // expenses[editIndex] = { ...expenseToEdit, ...expense };
+    const editedExpense = { ...expenseToEdit, ...expense };
+    saveExpense(editedExpense, editIndex);
+    this.setState(({
+      id: expenses[expenses.length - 1].id + 1,
+      ...this.resetState(),
     }));
   };
 
   render() {
     const { currency, description, method, tag, value, id } = this.state;
-    const { currencies } = this.props;
+    const { currencies, editor } = this.props;
     const expense = {
       id,
       value,
@@ -126,9 +158,10 @@ class WalletForm extends Component {
         </label>
         <button
           type="button"
-          onClick={ () => this.handleClick(expense) }
+          onClick={ editor ? () => this.handleSave(expense)
+            : () => this.handleClick(expense) }
         >
-          Adicionar despesa
+          {editor ? 'Editar despesa' : 'Adicionar despesa'}
 
         </button>
       </form>
@@ -136,21 +169,28 @@ class WalletForm extends Component {
   }
 }
 
-const mapStateToProps = ({ wallet: { currencies } }) => ({
+const mapStateToProps = ({ wallet: { currencies, editor, idToEdit, expenses } }) => ({
   currencies,
+  editor,
+  idToEdit,
+  expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrencies: () => dispatch(fetchAPI()),
   newExpense: (expense, exchange) => dispatch(addExpense(expense, exchange)),
-  saveExpense: (expenses) => dispatch(saveEditExpense(expenses)),
+  saveExpense: (expenses, index) => dispatch(saveEditExpense(expenses, index)),
 
 });
 
 WalletForm.propTypes = {
   fetchCurrencies: PropTypes.func.isRequired,
   newExpense: PropTypes.func.isRequired,
+  saveExpense: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  editor: PropTypes.bool.isRequired,
+  idToEdit: PropTypes.number.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.shape().isRequired).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);

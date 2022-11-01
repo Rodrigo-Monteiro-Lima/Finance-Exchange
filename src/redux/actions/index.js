@@ -6,6 +6,8 @@ export const SUCCESS_REQUEST = 'SUCCESS_REQUEST';
 export const FAILED_REQUEST = 'FAILED_REQUEST';
 export const NEW_EXPENSE = 'NEW_EXPENSE';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
+export const SAVE_EDIT = 'SAVE_EDIT';
 
 export const login = (user) => ({
   type: LOG_IN,
@@ -24,6 +26,10 @@ export const addExpense = (expense) => ({
 });
 
 export const deleteExpense = (index) => ({ type: DELETE_EXPENSE, index });
+
+export const editExpense = (id) => ({ type: EDIT_EXPENSE, id });
+
+export const saveEditExpense = (expense, index) => ({ type: SAVE_EDIT, expense, index });
 
 export const fetchAPI = () => async (dispatch) => {
   try {
