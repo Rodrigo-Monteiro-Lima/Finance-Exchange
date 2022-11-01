@@ -1,6 +1,5 @@
 import {
   REQUEST_API,
-  FAILED_REQUEST,
   SUCCESS_REQUEST,
   NEW_EXPENSE,
   DELETE_EXPENSE,
@@ -14,7 +13,6 @@ const initialState = {
   exchange: [],
   editor: false,
   idToEdit: 0,
-  error: '',
   total: '0',
 };
 
@@ -24,8 +22,6 @@ const walletReducer = (state = initialState, action) => {
     return { ...state, isFetching: true };
   case SUCCESS_REQUEST:
     return { ...state, currencies: action.data };
-  case FAILED_REQUEST:
-    return { ...state, error: action.error };
   case NEW_EXPENSE:
     return {
       ...state,

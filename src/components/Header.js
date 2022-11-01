@@ -8,7 +8,10 @@ class Header extends Component {
     return (
       <header style={ { display: 'flex', justifyContent: 'space-around' } }>
         <div data-testid="email-field">{email}</div>
-        <div data-testid="total-field">{total}</div>
+        <div data-testid="total-field">
+          {/* {Number(total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} */}
+          {total}
+        </div>
         <div data-testid="header-currency-field">BRL</div>
       </header>
     );

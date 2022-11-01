@@ -8,7 +8,7 @@ import Table from '../components/Table';
 class Wallet extends React.Component {
   render() {
     const { email } = this.props;
-    if (!email) return <div>Login não efetuado!</div>;
+    if (!email) return <h2>Login não efetuado!</h2>;
     return (
       <div>
         <Header />

@@ -30,12 +30,12 @@ class Login extends Component {
     history.push('/carteira');
   };
 
-  handleShowPassword = () => {
-    const { showPassword } = this.state;
-    this.setState({
-      showPassword: !showPassword,
-    });
-  };
+  // handleShowPassword = () => {
+  //   const { showPassword } = this.state;
+  //   this.setState({
+  //     showPassword: !showPassword,
+  //   });
+  // };
 
   buttonValidation = () => {
     const { password, email } = this.state;
