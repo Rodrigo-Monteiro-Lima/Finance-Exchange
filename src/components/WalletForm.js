@@ -90,7 +90,7 @@ class WalletForm extends Component {
     };
 
     return (
-      <form action="">
+      <form action="" data-testid="form">
         <label htmlFor="value">
           Valor:
           <input

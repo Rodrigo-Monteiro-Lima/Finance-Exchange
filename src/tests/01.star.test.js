@@ -20,10 +20,8 @@ describe('Startest Login', () => {
     expect(pathname).toBe('/');
     const email = screen.getByTestId('email-input');
     expect(email).toBeInTheDocument();
-    // expect(email).toHaveProperty('type', 'email');
     const password = screen.getByTestId('password-input');
     expect(password).toBeInTheDocument();
-    // expect(password).toHaveProperty('type', 'password');
     const button = screen.getByRole('button', { name: 'Entrar' });
     expect(button).toBeInTheDocument();
     test.forEach((item) => {
