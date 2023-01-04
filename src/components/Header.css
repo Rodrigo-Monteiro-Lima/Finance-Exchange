@@ -1,0 +1,53 @@
+header {
+  align-items: center;
+  background: white;
+  box-shadow: -4px 9px 13px rgba(5, 18, 54, 0.4);
+  display: flex;
+  height: 156px;
+  justify-content: center;
+  width: 1037px;
+}
+
+.email-container {
+  color: #2fc18c;
+  display: flex;
+  flex-direction: row;
+  font-family: Epilogue, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  gap: 0.547rem;
+  line-height: 14px;
+}
+
+.user {
+  height: 25px;
+  width: 25px;
+}
+
+.total-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: 0.5rem;
+}
+
+.expense-container {
+  color: #003be5;
+  display: flex;
+  flex-direction: row;
+  font-family: Epilogue, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 14px;
+}
+
+.coin {
+  height: 28px;
+  margin-right: 0.5rem;
+  width: 28px;
+}
+
+.currency {
+  padding-left: 0.5rem;
+}

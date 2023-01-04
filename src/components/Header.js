@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import './Header.css';
+import logo from '../assets/imgs/logoTrybeWallet.png';
+import user from '../assets/imgs/Vector.png';
+import coin from '../assets/imgs/Moedas.svg';
 
 class Header extends Component {
   render() {
-    const { email, total } = this.props;
+    const { email, expenses } = this.props;
     return (
       <header style={ { display: 'flex', justifyContent: 'space-around' } }>
-        <div data-testid="email-field">{email}</div>
-        <div data-testid="total-field">
-          {/* {Number(total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} */}
-          {total}
+        <img src={ logo } alt="logo" />
+        <div className="expense-container">
+          <img src={ coin } alt="Moedas ícone" className="coin" />
+          Total de despesas:
+          <div data-testid="total-field" className="total-container">
+            {/* {Number(total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} */}
+            {/* {total} */}
+            {expenses ? (expenses
+              .reduce((acc, curr) => acc + (curr.value * curr
+                .exchangeRates[curr.currency].ask), 0)).toFixed(2) : 0.00}
+          </div>
+          <div data-testid="header-currency-field" className="currency">BRL</div>
         </div>
-        <div data-testid="header-currency-field">BRL</div>
+        <div data-testid="email-field" className="email-container">
+          <img src={ user } alt="user ícone" className="user" />
+          {email}
+        </div>
       </header>
     );
   }
@@ -20,12 +35,12 @@ class Header extends Component {
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  total: PropTypes.string.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
-const mapStateToProps = ({ user: { email }, wallet: { total } }) => ({
+const mapStateToProps = ({ user: { email }, wallet: { expenses } }) => ({
   email,
-  total,
+  expenses,
 });
 
 export default connect(mapStateToProps)(Header);

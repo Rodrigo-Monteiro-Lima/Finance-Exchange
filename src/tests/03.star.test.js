@@ -18,7 +18,7 @@ describe('Startest WalletForm', () => {
         email: 'email@test.com',
       },
     };
-    const optionsArr = ['USD', 'CAD', 'EUR', 'GBP', 'ARS', 'BTC', 'LTC', 'JPY', 'CHF', 'AUD', 'CNY', 'ILS', 'ETH', 'XRP', 'DOGE', 'Dinheiro', 'Cartão de crédito', 'Cartão de débito', 'Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+    const optionsArr = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde', 'Dinheiro', 'Cartão de crédito', 'Cartão de débito', 'USD', 'CAD', 'EUR', 'GBP', 'ARS', 'BTC', 'LTC', 'JPY', 'CHF', 'AUD', 'CNY', 'ILS', 'ETH', 'XRP', 'DOGE'];
     const { store } = renderWithRouterAndRedux(<App />, { initialState, initialEntries: ['/carteira'] });
     const value = await screen.findByTestId('value-input');
     expect(value).toBeInTheDocument();

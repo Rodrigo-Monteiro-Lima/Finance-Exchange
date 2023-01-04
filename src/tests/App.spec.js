@@ -8,7 +8,7 @@ import mockData from './helpers/mockData';
 
 const getTotal = () => screen.queryByTestId('total-field');
 const debit = 'Cartão de débito';
-const optionsArr = ['USD', 'CAD', 'EUR', 'GBP', 'ARS', 'BTC', 'LTC', 'JPY', 'CHF', 'AUD', 'CNY', 'ILS', 'ETH', 'XRP', 'DOGE', 'Dinheiro', 'Cartão de crédito', debit, 'Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+const optionsArr = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde', 'Dinheiro', 'Cartão de crédito', debit, 'USD', 'CAD', 'EUR', 'GBP', 'ARS', 'BTC', 'LTC', 'JPY', 'CHF', 'AUD', 'CNY', 'ILS', 'ETH', 'XRP', 'DOGE'];
 const getValue = () => screen.getByTestId('value-input');
 const getDescription = () => screen.getByTestId('description-input');
 const getAddBtn = () => screen.queryByRole('button', { name: 'Adicionar despesa' });
@@ -37,10 +37,6 @@ describe('Testing App component', () => {
   });
   it('Testing if renders correctly', () => {
     renderWithRouterAndRedux(<App />);
-    const title = screen.getByRole('heading', { name: 'TrybeWallet', level: 1 });
-    expect(title).toBeInTheDocument();
-    const login = screen.getByRole('heading', { name: 'Login', level: 3 });
-    expect(login).toBeInTheDocument();
     const email = screen.getByPlaceholderText('Email');
     expect(email).toBeInTheDocument();
     expect(email).toHaveProperty('type', 'email');
@@ -194,7 +190,7 @@ describe('Testing App component', () => {
       },
     };
     renderWithRouterAndRedux(<App />, { initialState, initialEntries: ['/carteira'] });
-    const tds = ['Onze dólares', 'Lazer', debit, '11.00', 'Dólar Americano/Real Brasileiro', '4.75', '52.28', 'Real', 'EditarExcluir'];
+    const tds = ['Onze dólares', 'Lazer', debit, '11.00', 'Dólar Americano/Real Brasileiro', '4.75', '52.28', 'Real', ''];
     const cells = screen.getAllByRole('cell');
     cells.forEach((cell, index) => {
       expect(cell).toBeInTheDocument();
@@ -220,7 +216,7 @@ describe('Testing App component', () => {
       },
     };
     const { store } = renderWithRouterAndRedux(<App />, { initialState, initialEntries: ['/carteira'] });
-    const btnDel = screen.getByRole('button', { name: 'Excluir' });
+    const btnDel = screen.getByTestId('delete-btn');
     userEvent.click(btnDel);
     const cells = screen.queryAllByRole('cell');
     cells.forEach((cell) => {
@@ -260,7 +256,7 @@ describe('Testing App component', () => {
     renderWithRouterAndRedux(<App />, { initialState, initialEntries: ['/carteira'] });
     const total = getTotal();
     expect(total).toHaveTextContent('61.15');
-    const btnEdit = screen.getAllByRole('button', { name: 'Editar' });
+    const btnEdit = screen.getAllByTestId('edit-btn');
     userEvent.click(btnEdit[0]);
     const btnAdd = getAddBtn();
     expect(btnAdd).not.toBeInTheDocument();

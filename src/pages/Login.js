@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
+// import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import { login } from '../redux/actions';
+import './Login.css';
+import logo from '../assets/imgs/logoTrybeWallet.png';
 
 class Login extends Component {
   constructor() {
@@ -13,7 +15,7 @@ class Login extends Component {
       password: '',
       // passwordError: false,
       isButtonDisabled: true,
-      showPassword: false,
+      // showPassword: false,
     };
   }
 
@@ -62,7 +64,7 @@ class Login extends Component {
       email,
       password,
       isButtonDisabled,
-      showPassword,
+      // showPassword,
     //  passwordError,
     //   emailError,
     } = this.state;
@@ -76,26 +78,27 @@ class Login extends Component {
     //   </p>);
 
     return (
-      <div>
-        <h1>TrybeWallet</h1>
-        <h3>Login</h3>
-        <form action="">
-          <label htmlFor="email">
-            <input
-              type="email"
-              id="email"
-              name="email"
-              data-testid="email-input"
-              onChange={ this.handleChange }
-              value={ email }
-              placeholder="Email"
-            />
-            {/* {emailError && errorEmail} */}
-          </label>
-          <div style={ { display: 'inline-block' } }>
+      <div className="container">
+        <div className="input-container">
+          <img src={ logo } alt="logo" />
+          <form action="">
+            <label htmlFor="email">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                data-testid="email-input"
+                onChange={ this.handleChange }
+                value={ email }
+                placeholder="Email"
+              />
+              {/* {emailError && errorEmail} */}
+            </label>
+            {/* <div style={ { display: 'inline-block' } }> */}
             <label htmlFor="password" className="password">
               <input
-                type={ showPassword ? 'text' : 'password' }
+                // type={ showPassword ? 'text' : 'password' }
+                type="password"
                 id="password"
                 name="password"
                 data-testid="password-input"
@@ -104,21 +107,22 @@ class Login extends Component {
                 className="passwordInput"
                 placeholder="Senha"
               />
-              { showPassword
+              {/* { showPassword
                 ? <BsFillEyeSlashFill onClick={ this.handleShowPassword } />
-                : <BsFillEyeFill onClick={ this.handleShowPassword } />}
+                : <BsFillEyeFill onClick={ this.handleShowPassword } />} */}
             </label>
             {/* {passwordError && minPass } */}
-          </div>
-          <button
-            type="button"
-            data-testid="login-submit-button"
-            disabled={ isButtonDisabled }
-            onClick={ () => this.handleClick(email) }
-          >
-            Entrar
-          </button>
-        </form>
+            {/* </div> */}
+            <button
+              type="button"
+              data-testid="login-submit-button"
+              disabled={ isButtonDisabled }
+              onClick={ () => this.handleClick(email) }
+            >
+              Entrar
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

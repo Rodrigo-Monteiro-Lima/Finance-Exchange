@@ -1,0 +1,86 @@
+.form-input-container {
+  background: rgb(225, 229, 235);
+  border-radius: 0;
+  color: #003be5;
+  display: flex;
+  flex-flow: row wrap;
+  font-family: Epilogue, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  height: 134px;
+  justify-content: center;
+  line-height: 14px;
+  width: 1037px;
+}
+
+.form-input-container label {
+  margin-right: 2rem;
+}
+
+select {
+  border: 1px solid #003be5;
+  border-radius: 5px;
+  color: #003be5;
+  height: 30px;
+  margin-left: 0.7rem;
+  padding-left: 0.5rem;
+}
+
+.description {
+  height: 30px;
+  margin-left: 1rem;
+  padding-left: 1rem;
+  width: 288.86px;
+}
+
+.tag {
+  width: 155px;
+}
+
+.value {
+  height: 30px;
+  margin-left: 0.7rem;
+  width: 154px;
+}
+
+.method {
+  width: 228px;
+}
+
+.currencies {
+  width: 91px;
+}
+
+.button-container {
+  align-items: center;
+  background-color: white;
+  border-radius: 0 0 10px 10px;
+  box-shadow: -4px 9px 13px rgba(5, 18, 54, 0.4);
+  display: flex;
+  height: 95px;
+  justify-content: center;
+  width: 1037px;
+}
+
+.add-button {
+  background-color: rgb(47, 193, 140);
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-family: Epilogue, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  height: 40px;
+  line-height: 14px;
+  width: 330px;
+}
+
+.add-button:hover {
+  opacity: 0.8;
+}
+
+.expense-form {
+  gap: 0;
+}

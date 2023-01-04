@@ -1,0 +1,13 @@
+div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-table-container {
+  background: #003be5;
+  border-radius: 10px;
+  box-shadow: -4px 9px 13px rgba(3, 107, 82, 0.3);
+  height: 464px;
+  width: 1155px;
+}

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import WalletForm from '../components/WalletForm';
 import Table from '../components/Table';
+import './Wallet.css';
 
 class Wallet extends React.Component {
   render() {
@@ -12,8 +13,10 @@ class Wallet extends React.Component {
     return (
       <div>
         <Header />
-        <WalletForm />
-        <Table />
+        <div className="form-table-container">
+          <WalletForm />
+          <Table />
+        </div>
       </div>
     );
   }

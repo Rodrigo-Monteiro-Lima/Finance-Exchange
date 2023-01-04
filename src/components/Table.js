@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './Table.css';
-// import { MdDeleteForever } from 'react-icons/md';
-// import { FaRegEdit } from 'react-icons/fa';
+import { MdDeleteForever } from 'react-icons/md';
+import { FaRegEdit } from 'react-icons/fa';
 import { deleteExpense, editExpense } from '../redux/actions';
 
 class Table extends Component {
@@ -50,27 +50,24 @@ class Table extends Component {
               </td>
               <td>Real</td>
               <td>
-                {/* <FaRegEdit data-testid="edit-btn" /> */}
-                <button
-                  type="button"
-                  data-testid="edit-btn"
-                  onClick={ () => edit(expense.id) }
-                >
-                  Editar
-
-                </button>
-                {/* <MdDeleteForever
-                  data-testid="delete-btn"
-                  onClick={ () => removeExpense(index) }
-                /> */}
-                <button
-                  type="button"
-                  data-testid="delete-btn"
-                  onClick={ () => removeExpense(index) }
-                >
-                  Excluir
-
-                </button>
+                <div className="buttons">
+                  <button
+                    type="button"
+                    data-testid="edit-btn"
+                    onClick={ () => edit(expense.id) }
+                    className="edit-button"
+                  >
+                    <FaRegEdit />
+                  </button>
+                  <button
+                    type="button"
+                    data-testid="delete-btn"
+                    onClick={ () => removeExpense(index) }
+                    className="delete-button"
+                  >
+                    <MdDeleteForever />
+                  </button>
+                </div>
               </td>
             </tr>
           ))}
