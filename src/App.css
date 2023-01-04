@@ -6,7 +6,7 @@
 
 body {
   background: #2fc18c;
-  background-image: url('../imgs/foto\ fundo.png');
+  background-image: url('../src/assets/imgs/foto\ fundo.png');
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
